@@ -1,20 +1,26 @@
 # Commands
 
-## Production Build Scripts
 
-chmod +x prepare_production.sh
+# Venv
 
-./prepare_production.sh
+source backend/venv/bin/activate
 
 
 ## Running Gunicorn (Flask API)
 
 gunicorn --chdir backend --bind 0.0.0.0:5001 wsgi:application
 
+
 ## Running React App
 
 serve -s production_build/frontend_build -l 3000
 
+
+## Production Build Scripts
+
+chmod +x prepare_production.sh
+
+./prepare_production.sh
 
 
 ### Running Nginx
@@ -26,7 +32,6 @@ ps aux | grep nginx
 tail -f /opt/homebrew/var/log/nginx/error.log
 
 brew services start nginx
-
 
 
 # Testing Nginx
