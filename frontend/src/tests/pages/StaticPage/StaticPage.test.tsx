@@ -1,4 +1,4 @@
-// src/tests/pages/StaticPage/StaticPage.test.tsx
+// frontend/src/tests/pages/StaticPage/StaticPage.test.tsx
 
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest'; // Added beforeEach import

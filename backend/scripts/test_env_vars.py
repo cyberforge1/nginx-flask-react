@@ -1,4 +1,4 @@
-# scripts/test_env_vars.py
+# backend/scripts/test_env_vars.py
 
 from dotenv import load_dotenv
 import os

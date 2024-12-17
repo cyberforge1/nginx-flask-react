@@ -1,4 +1,4 @@
-// tests/main.test.ts
+// frontend/src/tests/main.test.ts
 
 import { it, expect, describe } from 'vitest';
 

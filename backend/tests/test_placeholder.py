@@ -1,4 +1,4 @@
-# tests/test_placeholder.py
+# backend/tests/test_placeholder.py
 
 def test_placeholder():
     """Placeholder test to ensure CI setup works."""

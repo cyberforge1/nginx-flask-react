@@ -1,4 +1,4 @@
-// src/pages/StaticPage/StaticPage.tsx
+// frontend/src/pages/StaticPage/StaticPage.tsx
 
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';

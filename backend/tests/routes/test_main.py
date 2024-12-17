@@ -1,4 +1,4 @@
-# tests/routes/test_main.py
+# backend/tests/routes/test_main.py
 
 def test_main(client):
     """Test the /api/ endpoint."""

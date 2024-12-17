@@ -1,4 +1,4 @@
-# tests/routes/test_helloworld.py
+# backend/tests/routes/test_helloworld.py
 
 def test_helloworld(client):
     """Test the /api/helloworld/ endpoint."""

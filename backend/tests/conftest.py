@@ -1,4 +1,4 @@
-# tests/conftest.py
+# backend/tests/conftest.py
 
 import pytest
 from app import create_app, db

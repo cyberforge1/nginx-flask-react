@@ -1,4 +1,4 @@
-# scripts/manual_endpoint_test.py
+# backend/scripts/manual_endpoint_test.py
 
 import os
 import json

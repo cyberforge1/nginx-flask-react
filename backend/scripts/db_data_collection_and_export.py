@@ -1,4 +1,4 @@
-# scripts/db_data_collection_and_export.py
+# backend/scripts/db_data_collection_and_export.py
 
 import os
 import json

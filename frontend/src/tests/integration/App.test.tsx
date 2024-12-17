@@ -1,4 +1,4 @@
-// src/tests/integration/App.test.tsx
+// frontend/src/tests/integration/App.test.tsx
 
 import { render, screen, fireEvent } from '@testing-library/react';
 import { vi, describe, it, beforeEach, expect } from 'vitest';

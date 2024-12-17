@@ -1,4 +1,4 @@
-// src/types/types.ts
+// frontend/src/types/types.ts
 
 export interface Todo {
     id: number; // Unique identifier for the todo item

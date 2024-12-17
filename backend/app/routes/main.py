@@ -1,4 +1,4 @@
-# app/routes/main.py
+# backend/app/routes/main.py
 
 from flask_restx import Namespace, Resource
 

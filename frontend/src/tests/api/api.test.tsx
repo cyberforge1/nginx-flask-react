@@ -1,4 +1,4 @@
-// src/tests/api/api.test.tsx
+// frontend/src/tests/api/api.test.tsx
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import axios from 'axios';

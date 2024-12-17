@@ -1,4 +1,4 @@
-# tests/integration/test_endpoints.py
+# backend/tests/integration/test_endpoints.py
 
 def test_todo_workflow(client):
     """Test the full Todo workflow."""

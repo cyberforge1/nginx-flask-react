@@ -1,4 +1,4 @@
-# scripts/db_connection_check.py
+# backend/scripts/db_connection_check.py
 
 import os
 from sqlalchemy import create_engine, text, inspect

@@ -1,4 +1,4 @@
-# tests/models/test_models.py
+# backend/tests/models/test_models.py
 
 from app.models import Todo
 

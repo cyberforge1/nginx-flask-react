@@ -1,4 +1,4 @@
-# app/routes/helloworld.py
+# backend/app/routes/helloworld.py
 
 from flask_restx import Namespace, Resource
 

@@ -1,4 +1,4 @@
-# run.py
+# backend/run.py
 
 from dotenv import load_dotenv
 import os

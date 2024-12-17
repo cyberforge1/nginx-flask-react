@@ -1,4 +1,4 @@
-# app/models.py
+# backend/app/models.py
 
 from . import db
 

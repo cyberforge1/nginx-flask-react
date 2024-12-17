@@ -1,4 +1,4 @@
-// src/api/api.ts
+// frontend/src/api/api.ts
 
 import axios, { AxiosResponse } from 'axios';
 import { Todo, TodoCreation, TodoUpdate, ApiResponse } from '../types/types';
