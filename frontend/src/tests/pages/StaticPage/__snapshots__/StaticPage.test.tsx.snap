@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`StaticPage Component > matches the snapshot 1`] = `
+<div
+  data-testid="static-page"
+>
+  <p>
+    Loading...
+  </p>
+  <button
+    aria-label="Go to Form"
+  >
+    Go to Form
+  </button>
+</div>
+`;

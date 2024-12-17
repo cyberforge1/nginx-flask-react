@@ -1,0 +1,81 @@
+{
+    "main": {
+        "url": "http://localhost:5001/api/",
+        "method": "GET",
+        "status_code": 200,
+        "response": {
+            "message": "Welcome to the Todo Management API!"
+        }
+    },
+    "helloworld": {
+        "url": "http://localhost:5001/api/helloworld/",
+        "method": "GET",
+        "status_code": 200,
+        "response": {
+            "message": "Hello, World!"
+        }
+    },
+    "todos_list": {
+        "url": "http://localhost:5001/api/todos/",
+        "method": "GET",
+        "status_code": 200,
+        "response": [
+            {
+                "id": 39,
+                "title": "something"
+            },
+            {
+                "id": 46,
+                "title": "here"
+            },
+            {
+                "id": 47,
+                "title": "now this"
+            },
+            {
+                "id": 57,
+                "title": "woweee"
+            },
+            {
+                "id": 58,
+                "title": "New Todo via cURL"
+            }
+        ]
+    },
+    "create_todo": {
+        "url": "http://localhost:5001/api/todos/",
+        "method": "POST",
+        "status_code": 201,
+        "response": {
+            "message": "Todo created",
+            "todo": {
+                "id": 59,
+                "title": "Sample Todo"
+            }
+        }
+    },
+    "single_todo": {
+        "url": "http://localhost:5001/api/todos/3/",
+        "method": "GET",
+        "status_code": 404,
+        "response": {
+            "error": "Todo not found"
+        }
+    },
+    "update_todo": {
+        "url": "http://localhost:5001/api/todos/3/",
+        "method": "PUT",
+        "status_code": 404,
+        "response": {
+            "error": "Todo not found"
+        }
+    },
+    "delete_todo": {
+        "url": "http://localhost:5001/api/todos/3/",
+        "method": "DELETE",
+        "status_code": 404,
+        "response": {
+            "error": "Todo not found"
+        }
+    }
+}

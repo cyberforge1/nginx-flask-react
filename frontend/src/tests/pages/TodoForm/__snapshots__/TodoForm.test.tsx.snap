@@ -1,0 +1,28 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FormPage Component > matches the snapshot 1`] = `
+<div
+  data-testid="form-page"
+>
+  <h1>
+    Todo Management
+  </h1>
+  <form
+    data-testid="todo-form"
+  >
+    <input
+      placeholder="Title"
+      type="text"
+      value=""
+    />
+    <button
+      type="submit"
+    >
+      Add Todo
+    </button>
+  </form>
+  <p>
+    Loading todos...
+  </p>
+</div>
+`;

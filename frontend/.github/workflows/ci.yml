@@ -1,0 +1,38 @@
+name: CI - Run Tests
+
+on:
+  push:
+    branches:
+      - main    # Run tests on push to the main branch
+      - develop # Optionally include other branches
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 # Specify the Node.js version your project requires
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Run the tests
+      - name: Run tests
+        run: npm test
+
+      # Optionally collect test coverage (if using a tool like `jest --coverage`)
+      # - name: Upload test coverage (optional)
+      #   if: success()
+      #   run: npm run coverage # Replace with the actual command for coverage
