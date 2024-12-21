@@ -1,4 +1,2 @@
 # Nginx Flask React
 
-
-
