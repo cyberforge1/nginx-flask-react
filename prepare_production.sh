@@ -5,10 +5,10 @@
 set -e
 
 # 1. Define paths and directories
-PROJECT_ROOT="/Users/softdev/Desktop/github-projects/nginx-flask-react"
+PROJECT_ROOT="/Users/softdev/Desktop/github_projects/nginx-flask-react"  # Updated path with underscore
 OUTPUT_DIR="$PROJECT_ROOT/production_build"
-BACKEND_BUILD_DIR="$OUTPUT_DIR/backend"
-STATIC_DIR="$BACKEND_BUILD_DIR/app/static"
+BACKEND_DIR="$PROJECT_ROOT/backend"
+STATIC_DIR="$BACKEND_DIR/static"
 NGINX_CONFIG_SRC="$PROJECT_ROOT/nginx-flask-react.conf"
 NGINX_CONFIG_DEST="$OUTPUT_DIR/nginx-flask-react.conf"
 ZIP_FILE="$OUTPUT_DIR/nginx-flask-react.zip"
@@ -16,32 +16,29 @@ ZIP_FILE="$OUTPUT_DIR/nginx-flask-react.zip"
 # 2. Cleanup previous build artifacts
 echo "Cleaning up previous builds..."
 rm -rf "$OUTPUT_DIR"
+rm -rf "$STATIC_DIR"
 
 # 3. Build the React frontend
 echo "Building the React frontend..."
 cd "$PROJECT_ROOT/frontend"
 npm install --silent
 npm run build --silent
-cd "$PROJECT_ROOT"
 
-# 4. Create the production output directory structure
-echo "Creating production build directory..."
-mkdir -p "$STATIC_DIR"  # Flask static directory
+# 4. Move React build to backend/static
+echo "Moving React build to Flask static folder..."
+mkdir -p "$STATIC_DIR"  # Ensure the static directory exists
+cp -r dist/* "$STATIC_DIR"
 
-# 5. Copy React build to Flask static folder
-echo "Copying React build to Flask static folder..."
-cp -r "$PROJECT_ROOT/frontend/dist/"* "$STATIC_DIR"
-
-# 6. Copy Flask backend files
+# 5. Copy Flask backend files to production build directory
 echo "Copying Flask backend files..."
-mkdir -p "$BACKEND_BUILD_DIR"
-cp -r "$PROJECT_ROOT/backend/app" "$BACKEND_BUILD_DIR/"
-cp "$PROJECT_ROOT/backend/run.py" "$BACKEND_BUILD_DIR/"
-cp "$PROJECT_ROOT/backend/requirements.txt" "$BACKEND_BUILD_DIR/"
-cp "$PROJECT_ROOT/backend/.env" "$BACKEND_BUILD_DIR/"
-cp -r "$PROJECT_ROOT/backend/migrations" "$BACKEND_BUILD_DIR/"
+mkdir -p "$OUTPUT_DIR/backend"
+cp -r "$BACKEND_DIR/app" "$OUTPUT_DIR/backend/"
+cp "$BACKEND_DIR/run.py" "$OUTPUT_DIR/backend/"
+cp "$BACKEND_DIR/requirements.txt" "$OUTPUT_DIR/backend/"
+cp "$BACKEND_DIR/.env" "$OUTPUT_DIR/backend/"
+cp -r "$BACKEND_DIR/migrations" "$OUTPUT_DIR/backend/"
 
-# 7. Copy NGINX server configuration
+# 6. Copy NGINX server configuration
 echo "Copying NGINX configuration..."
 if [ -f "$NGINX_CONFIG_SRC" ]; then
     cp "$NGINX_CONFIG_SRC" "$NGINX_CONFIG_DEST"
@@ -50,27 +47,27 @@ else
     exit 1
 fi
 
-# 8. Set up the production backend environment
+# 7. Set up the production backend environment
 echo "Setting up the production backend environment..."
 
 # Navigate to the production backend directory
-cd "$BACKEND_BUILD_DIR"
+cd "$OUTPUT_DIR/backend"
 
-# 8.1 Create virtual environment
+# 7.1 Create virtual environment
 if [ ! -d "venv" ]; then
     echo "Creating virtual environment..."
     python3 -m venv venv
 fi
 
-# 8.2 Activate virtual environment
+# 7.2 Activate virtual environment
 source venv/bin/activate
 
-# 8.3 Install dependencies
+# 7.3 Install dependencies
 echo "Installing dependencies..."
 pip install --upgrade pip --quiet
 pip install -r requirements.txt --quiet
 
-# 8.4 Run database migrations
+# 7.4 Run database migrations
 echo "Running database migrations..."
 flask db upgrade
 
@@ -78,13 +75,18 @@ flask db upgrade
 deactivate
 cd "$PROJECT_ROOT"
 
-# 9. Package the production build into a zip file
+# 8. Package the production build into a zip file
 echo "Creating zip archive for production deployment..."
 cd "$OUTPUT_DIR"
 zip -r "$ZIP_FILE" ./* > /dev/null
 cd "$PROJECT_ROOT"
 
-# 10. Final confirmation
+# 9. Final confirmation
 echo "Production build complete!"
+echo "React build location: '$STATIC_DIR'"
 echo "Build directory: '$OUTPUT_DIR'"
 echo "Zip archive: '$ZIP_FILE'"
+
+# 10. Serve the static build for testing (optional)
+echo "Serving the React build..."
+serve -s "$STATIC_DIR" -l 3000

@@ -6,6 +6,13 @@
 source backend/venv/bin/activate
 
 
+## Production Build Scripts
+
+chmod +x prepare_production.sh
+
+./prepare_production.sh
+
+
 ## Running Gunicorn (Flask API)
 
 gunicorn --chdir backend --bind 0.0.0.0:5001 wsgi:application
@@ -13,14 +20,7 @@ gunicorn --chdir backend --bind 0.0.0.0:5001 wsgi:application
 
 ## Running React App
 
-serve -s production_build/frontend_build -l 3000
-
-
-## Production Build Scripts
-
-chmod +x prepare_production.sh
-
-./prepare_production.sh
+serve -s backend/static -l 3000
 
 
 ### Running Nginx
@@ -53,3 +53,15 @@ curl http://localhost:5001/api/
 curl http://localhost:5001/api/helloworld/
 
 curl http://localhost:5001/api/todos/
+
+## Starting Nginx
+
+brew services start nginx
+
+## Port Processes
+
+lsof -i :3000
+lsof -i :5001
+
+
+kill -9 <PID>

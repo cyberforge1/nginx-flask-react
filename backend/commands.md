@@ -13,7 +13,7 @@ pip freeze > requirements.txt
 
 # Run App
 
-python run.py
+python3 run.py
 
 # Documentation
 
