@@ -5,7 +5,7 @@
 set -e
 
 # 1. Define paths and directories
-PROJECT_ROOT="/Users/softdev/Desktop/github_projects/nginx-flask-react"  # Updated path with underscore
+PROJECT_ROOT="$(pwd)"
 OUTPUT_DIR="$PROJECT_ROOT/production_build"
 BACKEND_DIR="$PROJECT_ROOT/backend"
 STATIC_DIR="$BACKEND_DIR/static"
@@ -37,11 +37,12 @@ cp "$BACKEND_DIR/run.py" "$OUTPUT_DIR/backend/"
 cp "$BACKEND_DIR/requirements.txt" "$OUTPUT_DIR/backend/"
 cp "$BACKEND_DIR/.env" "$OUTPUT_DIR/backend/"
 cp -r "$BACKEND_DIR/migrations" "$OUTPUT_DIR/backend/"
+cp "$BACKEND_DIR/wsgi.py" "$OUTPUT_DIR/backend/"  # Ensure wsgi.py is included
 
 # 6. Copy NGINX server configuration
 echo "Copying NGINX configuration..."
 if [ -f "$NGINX_CONFIG_SRC" ]; then
-    cp "$NGINX_CONFIG_SRC" "$NGINX_CONFIG_DEST"
+    cp "$NGINX_CONFIG_SRC" "$OUTPUT_DIR/nginx-flask-react.conf"
 else
     echo "Error: NGINX configuration file not found at '$NGINX_CONFIG_SRC'."
     exit 1
@@ -77,6 +78,7 @@ cd "$PROJECT_ROOT"
 
 # 8. Package the production build into a zip file
 echo "Creating zip archive for production deployment..."
+mkdir -p "$OUTPUT_DIR"  # Ensure OUTPUT_DIR exists
 cd "$OUTPUT_DIR"
 zip -r "$ZIP_FILE" ./* > /dev/null
 cd "$PROJECT_ROOT"
@@ -88,5 +90,8 @@ echo "Build directory: '$OUTPUT_DIR'"
 echo "Zip archive: '$ZIP_FILE'"
 
 # 10. Serve the static build for testing (optional)
-echo "Serving the React build..."
-serve -s "$STATIC_DIR" -l 3000
+# Removed the serve command since NGINX will handle serving the frontend
+# If you still want to use it for local testing, uncomment the following lines:
+
+# echo "Serving the React build for testing..."
+# serve -s "$STATIC_DIR" -l 3000

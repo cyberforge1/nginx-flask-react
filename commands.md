@@ -63,5 +63,9 @@ brew services start nginx
 lsof -i :3000
 lsof -i :5001
 
-
 kill -9 <PID>
+
+
+## Nginx Config file
+
+code /opt/homebrew/etc/nginx/nginx.conf
